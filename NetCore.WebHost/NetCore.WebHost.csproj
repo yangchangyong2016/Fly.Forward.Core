@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NetCore.Common.Extension\NetCore.Common.Extension.csproj" />
+    <ProjectReference Include="..\NetCore.Common.Utils\NetCore.Common.Utils.csproj" />
+    <ProjectReference Include="..\NetCore.Framework.Extensions\NetCore.Framework.Extensions.csproj" />
+  </ItemGroup>
+
+</Project>
