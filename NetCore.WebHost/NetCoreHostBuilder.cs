@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using NetCore.Common.Utils;
@@ -44,13 +45,14 @@ namespace NetCore.WebHost
 				hostOptions.Urls = "http://*:5000";
 
 			return Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(args)
+                    .UseServiceProviderFactory(new AutofacServiceProviderFactory())
                     .UseDefaultServiceProvider(options => { options.ValidateOnBuild = false; })
                     .ConfigureWebHostDefaults(webBuilder =>
                     {
                         webBuilder//.UseLogging()
                             .UseStartup<TStartup>()
                             .UseUrls(hostOptions.Urls);
-                    });
+                    }); 
         }
     }
 }

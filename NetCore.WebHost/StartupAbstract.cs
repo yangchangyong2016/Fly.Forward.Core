@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Autofac;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NetCore.Common.Utils;
+using NetCore.Framework.Extensions.Autofac;
 using NetCore.WebHost.HostAppSetting;
 using System;
 using System.Collections.Generic;
@@ -39,8 +41,19 @@ namespace NetCore.WebHost
         public virtual void Configure(IApplicationBuilder app)
         {
             app.UseWebHost(_hostOptions, Env);
-
             //app.UseShutdownHandler();
+        }
+
+        /// <summary>
+        /// 整个方法被Autofa自动调用
+        /// 负责注册各种服务
+        /// 尽管Autofac 有专门的地方来注册服务
+        /// 之前ServiceCollection注册的服务其实也会生效，接管过来；
+        /// </summary>
+        /// <param name="containerBuilder"></param>
+        public void ConfigureContainer(ContainerBuilder containerBuilder)
+        {
+            containerBuilder.RegisterModule(new AutofacModuleRegister());
         }
     }
 }
